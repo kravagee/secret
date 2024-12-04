@@ -1,16 +1,16 @@
 import sys
 
-from PyQt6 import uic
 from PyQt6.QtCore import QPointF, Qt, QRectF
 from PyQt6.QtGui import QPainter, QColor, QPolygonF
 from PyQt6.QtWidgets import QWidget, QApplication
 from random import randint
+import UI
 
 
-class Suprematism(QWidget):
+class Suprematism(QWidget, UI.Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.do_paint = False
         self.cur_figure = 'круг'
         self.center = (0, 0)
@@ -30,7 +30,7 @@ class Suprematism(QWidget):
 
     def draw_figure(self, qp):
         rad = randint(20, 100)
-        color = QColor(255, 255, 0)
+        color = QColor(randint(0, 255), randint(0, 255), randint(0, 255))
         qp.setBrush(color)
         if self.cur_figure == 'круг':
             qp.drawEllipse(QPointF(randint(0, 1000), randint(0, 1000)), rad, rad)
